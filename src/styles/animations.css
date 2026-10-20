@@ -1,0 +1,62 @@
+.cat-shadow {
+  position: absolute;
+  left: 20%; right: 20%; bottom: 0;
+  height: 6%;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: shadow var(--speed, 1s) ease-in-out infinite;
+}
+
+.body-wrap, .head, .arm, .tail, .eyes {
+  transform-box: fill-box;
+  will-change: transform;
+}
+
+.body-wrap { transform-origin: 50% 100%; animation: jump var(--speed) ease-in-out infinite; }
+.head { transform-origin: 50% 90%; animation: sway calc(var(--speed) * 2) ease-in-out infinite; }
+.arm-left { transform-origin: 50% 10%; animation: wave-left var(--speed) ease-in-out infinite; }
+.arm-right { transform-origin: 50% 10%; animation: wave-right var(--speed) ease-in-out infinite; }
+.tail { transform-origin: 0% 100%; animation: wag calc(var(--speed) * 0.5) ease-in-out infinite; }
+.eyes { transform-origin: 50% 50%; animation: blink calc(var(--speed) * 4) infinite; }
+.cat { animation: spin calc(var(--speed) * 8) ease-in-out infinite; transform-origin: 50% 60%; }
+
+.is-paused *, .is-paused { animation-play-state: paused !important; }
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0) scale(1.05, 0.95); }
+  50% { transform: translateY(-28px) scale(0.97, 1.05); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+@keyframes wave-left {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(150deg); }
+}
+@keyframes wave-right {
+  0%, 100% { transform: rotate(-150deg); }
+  50% { transform: rotate(-20deg); }
+}
+@keyframes wag {
+  0%, 100% { transform: rotate(-12deg); }
+  50% { transform: rotate(14deg); }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+@keyframes spin {
+  0%, 40% { transform: rotate(0); }
+  50%, 90% { transform: rotate(0) scale(1.08); }
+  100% { transform: rotate(0); }
+}
+@keyframes shadow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(0.6); opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-stage * { animation-duration: 4s !important; }
+}
